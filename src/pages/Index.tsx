@@ -19,7 +19,7 @@ const Index = () => {
   const renderContent = () => {
     switch (activeTab) {
       case "home":
-        return <HomeSection />;
+        return <HomeSection onNavigate={setActiveTab} />;
       case "about":
         return <AboutSection />;
       case "work":

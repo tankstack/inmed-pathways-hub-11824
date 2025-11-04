@@ -8,7 +8,11 @@ import heroImage from "@/assets/hero-image.jpg";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Autoplay from "embla-carousel-autoplay";
 
-const HomeSection = () => {
+interface HomeSectionProps {
+  onNavigate?: (tab: string) => void;
+}
+
+const HomeSection = ({ onNavigate }: HomeSectionProps) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -58,11 +62,11 @@ const HomeSection = () => {
                         Empowering vulnerable children, families, and communities.
                       </p>
                       <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
-                        <Button variant="hero" size="lg" className="group">
+                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("donate")}>
                           Donate
                           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
-                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary" onClick={() => onNavigate?.("contact")}>
                           Get Involved
                         </Button>
                       </div>
@@ -88,11 +92,11 @@ const HomeSection = () => {
                         Working together to create sustainable solutions.
                       </p>
                       <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
-                        <Button variant="hero" size="lg" className="group">
+                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("contact")}>
                           Partner
                           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
-                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary" onClick={() => onNavigate?.("contact")}>
                           Volunteer
                         </Button>
                       </div>
@@ -118,11 +122,11 @@ const HomeSection = () => {
                         Supporting local leaders and sustainable impact.
                       </p>
                       <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
-                        <Button variant="hero" size="lg" className="group">
+                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("donate")}>
                           Donate
                           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
-                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary" onClick={() => onNavigate?.("contact")}>
                           Partner
                         </Button>
                       </div>
@@ -143,11 +147,11 @@ const HomeSection = () => {
                         Transforming Lives Through Collaboration and Innovation
                       </h1>
                       <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in mt-6 md:mt-8">
-                        <Button variant="hero" size="lg" className="group">
+                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("contact")}>
                           Get Involved
                           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
-                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary" onClick={() => onNavigate?.("donate")}>
                           Donate
                         </Button>
                       </div>
