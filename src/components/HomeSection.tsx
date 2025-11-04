@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import * as React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,11 +9,11 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import Autoplay from "embla-carousel-autoplay";
 
 const HomeSection = () => {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!api) return;
 
     setCount(api.scrollSnapList().length);
@@ -24,10 +24,10 @@ const HomeSection = () => {
     });
   }, [api]);
 
-  const autoplayPlugin = Autoplay({
-    delay: 5000,
-    stopOnInteraction: false,
-  });
+  const autoplayPlugin = React.useMemo(
+    () => Autoplay({ delay: 5000, stopOnInteraction: false }),
+    []
+  );
 
   return (
     <div id="home" className="py-8">
