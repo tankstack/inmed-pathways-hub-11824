@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselApi } from "@/components/ui/carousel";
-import { ArrowRight, Heart, Users, Mail, MapPin, TrendingUp, Target } from "lucide-react";
+import { ArrowRight, Heart, Users, Mail, MapPin, TrendingUp, Target, Sparkles, HandshakeIcon, Lightbulb, Shield, UsersRound, Leaf } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Autoplay from "embla-carousel-autoplay";
@@ -222,6 +222,75 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
             We build effective systems that deliver innovative and sustainable approaches to breaking 
             complex cycles of poverty for current and future generations.
           </p>
+        </Card>
+
+        {/* Our Vision */}
+        <Card className="p-8 md:p-12 mb-16 shadow-medium bg-gradient-to-br from-background to-secondary/5">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-foreground mb-6">Our Vision</h2>
+            <div className="w-24 h-1 bg-gradient-warm mx-auto mb-8"></div>
+            <p className="text-xl text-foreground font-medium leading-relaxed mb-4">
+              A future where every child, family, and community thrives in health, dignity, and self-reliance.
+            </p>
+            <div className="h-8"></div>
+          </div>
+        </Card>
+
+        {/* Our Mission */}
+        <Card className="p-8 md:p-12 mb-16 shadow-medium bg-gradient-to-br from-background to-accent/5">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-foreground mb-6">Our Mission</h2>
+            <div className="w-24 h-1 bg-gradient-secondary mx-auto mb-8"></div>
+            <p className="text-xl text-foreground font-medium leading-relaxed mb-4">
+              Building pathways that empower vulnerable children, families, and communities to achieve lasting well-being and self-reliance.
+            </p>
+            <div className="h-8"></div>
+          </div>
+        </Card>
+
+        {/* Our Values */}
+        <Card className="p-8 md:p-12 mb-16 shadow-medium">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Our Values</h2>
+            <div className="w-24 h-1 bg-gradient-warm mx-auto"></div>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="p-6 rounded-lg bg-gradient-to-br from-primary/5 to-primary/10 hover-scale transition-all duration-300 hover:shadow-lg">
+              <Sparkles className="w-10 h-10 text-primary mb-4" />
+              <h3 className="text-xl font-bold text-foreground mb-2">Empowerment</h3>
+              <p className="text-muted-foreground">Equip. Enable. Elevate.</p>
+            </div>
+            
+            <div className="p-6 rounded-lg bg-gradient-to-br from-secondary/5 to-secondary/10 hover-scale transition-all duration-300 hover:shadow-lg">
+              <HandshakeIcon className="w-10 h-10 text-secondary mb-4" />
+              <h3 className="text-xl font-bold text-foreground mb-2">Collaboration</h3>
+              <p className="text-muted-foreground">Partner. Share. Build.</p>
+            </div>
+            
+            <div className="p-6 rounded-lg bg-gradient-to-br from-accent/5 to-accent/10 hover-scale transition-all duration-300 hover:shadow-lg">
+              <Lightbulb className="w-10 h-10 text-accent mb-4" />
+              <h3 className="text-xl font-bold text-foreground mb-2">Innovation</h3>
+              <p className="text-muted-foreground">Create. Adapt. Advance.</p>
+            </div>
+            
+            <div className="p-6 rounded-lg bg-gradient-to-br from-primary/5 to-primary/10 hover-scale transition-all duration-300 hover:shadow-lg">
+              <Shield className="w-10 h-10 text-primary mb-4" />
+              <h3 className="text-xl font-bold text-foreground mb-2">Integrity</h3>
+              <p className="text-muted-foreground">Honest. Transparent. Fair.</p>
+            </div>
+            
+            <div className="p-6 rounded-lg bg-gradient-to-br from-secondary/5 to-secondary/10 hover-scale transition-all duration-300 hover:shadow-lg">
+              <UsersRound className="w-10 h-10 text-secondary mb-4" />
+              <h3 className="text-xl font-bold text-foreground mb-2">Inclusion</h3>
+              <p className="text-muted-foreground">Listen. Value. Respect.</p>
+            </div>
+            
+            <div className="p-6 rounded-lg bg-gradient-to-br from-accent/5 to-accent/10 hover-scale transition-all duration-300 hover:shadow-lg">
+              <Leaf className="w-10 h-10 text-accent mb-4" />
+              <h3 className="text-xl font-bold text-foreground mb-2">Resilience</h3>
+              <p className="text-muted-foreground">Recover. Adapt. Thrive.</p>
+            </div>
+          </div>
         </Card>
 
         {/* Featured Project */}
