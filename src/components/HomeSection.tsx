@@ -1,53 +1,183 @@
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ArrowRight, Heart, Users, BookOpen, Mail, MapPin, TrendingUp, Target } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselApi } from "@/components/ui/carousel";
+import { ArrowRight, Heart, Users, Mail, MapPin, TrendingUp, Target } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import Autoplay from "embla-carousel-autoplay";
 
 const HomeSection = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  const autoplayPlugin = Autoplay({
+    delay: 5000,
+    stopOnInteraction: false,
+  });
+
   return (
     <div id="home" className="py-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Carousel - Building Pathways */}
-        <Carousel className="mb-16">
-          <CarouselContent>
-            <CarouselItem>
-              <div className="relative rounded-2xl overflow-hidden h-[500px]">
-                <img 
-                  src={heroImage}
-                  alt="INMED South Africa - Building Pathways to Well-Being"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70 flex items-center">
-                  <div className="max-w-4xl mx-auto px-8 text-center text-white">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-                      Building Pathways to Well-Being
-                    </h1>
-                    <p className="text-xl md:text-2xl mb-8 animate-fade-in">
-                      Empowering vulnerable children, families, and communities to achieve lasting well-being and self-reliance.
-                    </p>
-                    <div className="flex gap-4 justify-center flex-wrap animate-fade-in">
-                      <Button variant="hero" size="lg" className="group">
-                        <Heart className="w-5 h-5 mr-2" />
-                        Donate Now
-                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                      <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
-                        <Users className="w-5 h-5 mr-2" />
-                        Get Involved
-                      </Button>
+        <div className="relative mb-16">
+          <Carousel 
+            setApi={setApi}
+            plugins={[autoplayPlugin]}
+            opts={{ loop: true }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {/* Slide 1 */}
+              <CarouselItem>
+                <div className="relative rounded-2xl overflow-hidden h-[400px] md:h-[500px] lg:h-[600px]">
+                  <img 
+                    src={heroImage}
+                    alt="Building Pathways to Well-being & Self-Reliance"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-primary/70 flex items-center justify-center">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
+                        Building Pathways to Well-being & Self-Reliance for Every Child & Family
+                      </h1>
+                      <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 animate-fade-in">
+                        Empowering vulnerable children, families, and communities.
+                      </p>
+                      <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
+                        <Button variant="hero" size="lg" className="group">
+                          Donate
+                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                          Get Involved
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </CarouselItem>
-            {/* Add more carousel items by uploading images */}
-          </CarouselContent>
-          <CarouselPrevious className="left-4" />
-          <CarouselNext className="right-4" />
-        </Carousel>
+              </CarouselItem>
+
+              {/* Slide 2 */}
+              <CarouselItem>
+                <div className="relative rounded-2xl overflow-hidden h-[400px] md:h-[500px] lg:h-[600px]">
+                  <img 
+                    src={heroImage}
+                    alt="Thriving in Health, Dignity & Self-Reliance"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-primary/70 flex items-center justify-center">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
+                        Thriving in Health, Dignity & Self-Reliance
+                      </h1>
+                      <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 animate-fade-in">
+                        Working together to create sustainable solutions.
+                      </p>
+                      <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
+                        <Button variant="hero" size="lg" className="group">
+                          Partner
+                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                          Volunteer
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              {/* Slide 3 */}
+              <CarouselItem>
+                <div className="relative rounded-2xl overflow-hidden h-[400px] md:h-[500px] lg:h-[600px]">
+                  <img 
+                    src={heroImage}
+                    alt="Empowering Communities to Build a Better Future"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-primary/70 flex items-center justify-center">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
+                        Empowering Communities to Build a Better Future
+                      </h1>
+                      <p className="text-lg sm:text-xl md:text-2xl mb-6 md:mb-8 animate-fade-in">
+                        Supporting local leaders and sustainable impact.
+                      </p>
+                      <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
+                        <Button variant="hero" size="lg" className="group">
+                          Donate
+                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                          Partner
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              {/* Slide 4 - Video */}
+              <CarouselItem>
+                <div className="relative rounded-2xl overflow-hidden h-[400px] md:h-[500px] lg:h-[600px]">
+                  <div className="w-full h-full bg-muted flex items-center justify-center">
+                    <p className="text-muted-foreground text-center px-4">[Video Placeholder - Auto-play, Loop, Muted]</p>
+                  </div>
+                  <div className="absolute inset-0 bg-primary/70 flex items-center justify-center">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in">
+                        Transforming Lives Through Collaboration and Innovation
+                      </h1>
+                      <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in mt-6 md:mt-8">
+                        <Button variant="hero" size="lg" className="group">
+                          Get Involved
+                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary">
+                          Donate
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            
+            {/* Navigation Arrows */}
+            <CarouselPrevious className="left-2 md:left-4 h-10 w-10 md:h-12 md:w-12" />
+            <CarouselNext className="right-2 md:right-4 h-10 w-10 md:h-12 md:w-12" />
+          </Carousel>
+
+          {/* Indicator Dots */}
+          <div className="flex justify-center gap-2 mt-4">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === current 
+                    ? 'w-8 bg-primary' 
+                    : 'w-2 bg-primary/30 hover:bg-primary/50'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
 
         {/* Impact at a Glance */}
         <div className="bg-gradient-hero rounded-2xl p-8 md:p-12 text-white mb-16">
