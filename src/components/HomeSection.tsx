@@ -62,7 +62,7 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
                         Empowering vulnerable children, families, and communities.
                       </p>
                       <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
-                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("donate")}>
+                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("contact")}>
                           Donate
                           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
@@ -122,7 +122,7 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
                         Supporting local leaders and sustainable impact.
                       </p>
                       <div className="flex gap-3 md:gap-4 justify-center flex-wrap animate-fade-in">
-                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("donate")}>
+                        <Button variant="hero" size="lg" className="group" onClick={() => onNavigate?.("contact")}>
                           Donate
                           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
@@ -151,7 +151,7 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
                           Get Involved
                           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
-                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary" onClick={() => onNavigate?.("donate")}>
+                        <Button variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-primary" onClick={() => onNavigate?.("contact")}>
                           Donate
                         </Button>
                       </div>
