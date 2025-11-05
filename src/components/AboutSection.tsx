@@ -1,248 +1,244 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Leaf, Apple, Heart, Sprout, Briefcase, Rocket, Users, Target, Quote, ImageIcon } from "lucide-react";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
+import { ArrowRight, Target, Heart, Users, Shield, Lightbulb, Zap, MapPin, FileText } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AboutSection = () => {
-  const pillars = [
+  const navigate = useNavigate();
+  
+  const values = [
     {
-      id: "pillar1",
-      icon: <Leaf className="w-12 h-12" />,
-      title: "Adaptive Agriculture for Resilience",
-      shortDesc: "Building sustainable food systems through innovative farming practices. Content to be developed by NBCC after interview with INMED.",
-      color: "from-primary/5 to-primary/10",
-      iconColor: "text-primary",
-      sections: [
-        { title: "Community Projects", content: "Content placeholder - to be developed by NBCC." },
-        { title: "Capacity Building (School Gardens)", content: "Content placeholder - to be developed by NBCC." },
-        { title: "Quotes from Funders", content: "Content placeholder - to be developed by NBCC." }
-      ]
+      icon: <Zap className="w-8 h-8" />,
+      title: "Empowerment",
+      description: "Equip. Enable. Elevate.",
+      color: "text-accent"
     },
     {
-      id: "pillar2",
-      icon: <Apple className="w-12 h-12" />,
-      title: "Nutrition & Healthy Lifestyles",
-      shortDesc: "Promoting wellness and nutrition education for healthier communities. Content to be developed by NBCC after interview with INMED.",
-      color: "from-secondary/5 to-secondary/10",
-      iconColor: "text-secondary",
-      sections: [
-        { title: "Health in Action", content: "Content placeholder - to be developed by NBCC." },
-        { title: "School Community Nutrition Support", content: "Content placeholder - to be developed by NBCC." },
-        { title: "Chronic Illness Prevention", content: "Content placeholder - to be developed by NBCC." }
-      ]
+      icon: <Users className="w-8 h-8" />,
+      title: "Collaboration",
+      description: "Partner. Share. Build.",
+      color: "text-secondary"
     },
     {
-      id: "pillar3",
-      icon: <Sprout className="w-12 h-12" />,
-      title: "Climate-Smart Livelihoods",
-      shortDesc: "Empowering communities to adapt and thrive in changing climates. Content to be developed by NBCC after interview with INMED.",
-      color: "from-accent/5 to-accent/10",
-      iconColor: "text-accent",
-      sections: [
-        { title: "Climate Adaptations", content: "Content placeholder - to be developed by NBCC." },
-        { title: "Women/Youth Empowerment", content: "Content placeholder - to be developed by NBCC." }
-      ]
+      icon: <Lightbulb className="w-8 h-8" />,
+      title: "Innovation",
+      description: "Create. Adapt. Advance.",
+      color: "text-primary"
     },
     {
-      id: "pillar4",
-      icon: <Briefcase className="w-12 h-12" />,
-      title: "Employment Creation",
-      shortDesc: "Creating sustainable job opportunities and economic empowerment. Content to be developed by NBCC after interview with INMED.",
-      color: "from-primary/5 to-primary/10",
-      iconColor: "text-primary",
-      sections: [
-        { title: "Social Employment", content: "Content placeholder - to be developed by NBCC." }
-      ]
+      icon: <Shield className="w-8 h-8" />,
+      title: "Integrity",
+      description: "Honest. Transparent. Fair.",
+      color: "text-success"
     },
     {
-      id: "pillar5",
-      icon: <Rocket className="w-12 h-12" />,
-      title: "Social Entrepreneurship",
-      shortDesc: "Fostering innovation and sustainable business solutions. Content to be developed by NBCC after interview with INMED.",
-      color: "from-secondary/5 to-secondary/10",
-      iconColor: "text-secondary",
-      sections: [
-        { title: "INMED Aquaponics Social Enterprises", content: "Content placeholder - to be developed by NBCC." }
-      ]
+      icon: <Heart className="w-8 h-8" />,
+      title: "Inclusion",
+      description: "Listen. Value. Respect.",
+      color: "text-accent"
+    },
+    {
+      icon: <Target className="w-8 h-8" />,
+      title: "Resilience",
+      description: "Recover. Adapt. Thrive.",
+      color: "text-secondary"
     }
+  ];
+
+  const staffMembers = [
+    { 
+      id: 1,
+      name: "John Doe", 
+      role: "Executive Director",
+      bio: "Leading with vision and passion for community development, John has dedicated over 15 years to empowering vulnerable communities."
+    },
+    { 
+      id: 2,
+      name: "Jane Smith", 
+      role: "Program Manager",
+      bio: "Dedicated to creating impactful programs that transform lives, Jane brings innovative approaches to youth development."
+    },
+    { 
+      id: 3,
+      name: "Mike Johnson", 
+      role: "Field Coordinator",
+      bio: "Bringing programs to life in communities across South Africa, Mike ensures our initiatives reach those who need them most."
+    },
+    { 
+      id: 4,
+      name: "Sarah Williams", 
+      role: "Communications Lead",
+      bio: "Telling the stories that matter and amplifying community voices, Sarah connects our mission with the world."
+    },
+    { 
+      id: 5,
+      name: "David Brown", 
+      role: "Finance Manager",
+      bio: "Ensuring resources are used effectively for maximum impact, David maintains transparency and accountability."
+    },
+    { 
+      id: 6,
+      name: "Emily Davis", 
+      role: "Training Specialist",
+      bio: "Empowering youth with skills for a brighter future, Emily designs programs that unlock potential."
+    }
+  ];
+
+  const teamMembers = [
+    { id: 1, name: "Alice Thompson" },
+    { id: 2, name: "Robert Miller" },
+    { id: 3, name: "Lisa Anderson" },
+    { id: 4, name: "James Wilson" }
   ];
 
   return (
     <div id="about" className="py-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            About INMED
-          </h1>
-          <div className="w-24 h-1 bg-gradient-warm mx-auto mb-8"></div>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            About INMED South Africa
+          </h2>
+          <div className="w-24 h-1 bg-gradient-primary mx-auto mb-8"></div>
         </div>
 
-        {/* Section 1: About INMED Intro */}
-        <Card className="p-8 md:p-12 mb-16 shadow-medium bg-gradient-to-br from-background to-secondary/5 animate-fade-in">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-6">Who We Are</h2>
-            <div className="w-24 h-1 bg-gradient-secondary mx-auto mb-8"></div>
+        {/* Mission, Vision, Values */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+          <Card className="p-8 shadow-medium">
+            <h4 className="text-2xl font-bold text-primary mb-4">Our Vision</h4>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Overview of the work and the pillars/areas of focus. Content to be developed by NBCC after interview with INMED.
+              A future where every child, family, and community thrives in health, 
+              dignity, and self-reliance.
             </p>
-          </div>
-        </Card>
+          </Card>
 
-        {/* Section 2: Program Pillars Overview */}
+          <Card className="p-8 shadow-medium">
+            <h4 className="text-2xl font-bold text-secondary mb-4">Our Mission</h4>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Building pathways that empower vulnerable children, families, and 
+              communities to achieve lasting well-being and self-reliance.
+            </p>
+          </Card>
+        </div>
+
+        {/* Values */}
         <div className="mb-16">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Program Pillars</h2>
-            <div className="w-24 h-1 bg-gradient-warm mx-auto mb-6"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Five key areas of focus driving sustainable change in communities across Southern Africa.
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {pillars.map((pillar, index) => (
-              <Card 
-                key={pillar.id} 
-                className={`overflow-hidden shadow-medium hover:shadow-strong transition-all duration-300 animate-fade-in`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className={`bg-gradient-to-br ${pillar.color} p-8`}>
-                  <div className="grid md:grid-cols-2 gap-8 items-center">
-                    {/* Text Content */}
-                    <div className="space-y-4">
-                      <div className={`${pillar.iconColor} mb-4`}>
-                        {pillar.icon}
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-                        {pillar.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {pillar.shortDesc}
-                      </p>
-                      
-                      {/* Buttons */}
-                      <div className="flex flex-wrap gap-3 pt-4">
-                        <Button variant="secondary" className="group">
-                          Read More
-                        </Button>
-                        <Button variant="outline" className="group">
-                          <ImageIcon className="w-4 h-4 mr-2" />
-                          View Gallery
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Image Placeholder */}
-                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center hover-scale transition-all duration-300 cursor-pointer">
-                      <div className="text-center p-6">
-                        <ImageIcon className="w-16 h-16 text-muted-foreground mx-auto mb-3" />
-                        <p className="text-muted-foreground font-semibold">Project Image Placeholder</p>
-                        <p className="text-sm text-muted-foreground/70 mt-2">Landscape format recommended</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Expandable Content */}
-                  <div className="mt-8">
-                    <Accordion type="single" collapsible className="w-full">
-                      <AccordionItem value="details" className="border-border/50">
-                        <AccordionTrigger className="text-foreground font-semibold hover:text-primary">
-                          View Full Details
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <div className="space-y-6 pt-4">
-                            {/* Intro */}
-                            <div>
-                              <h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                                <Target className="w-5 h-5 text-primary" />
-                                Introduction
-                              </h4>
-                              <p className="text-muted-foreground">
-                                Content placeholder - to be developed by NBCC.
-                              </p>
-                            </div>
-
-                            {/* Goals */}
-                            <div>
-                              <h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                                <Target className="w-5 h-5 text-secondary" />
-                                Goals
-                              </h4>
-                              <p className="text-muted-foreground">
-                                Content placeholder - to be developed by NBCC.
-                              </p>
-                            </div>
-
-                            {/* Key Activities */}
-                            <div>
-                              <h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                                <Heart className="w-5 h-5 text-accent" />
-                                Key Activities
-                              </h4>
-                              <p className="text-muted-foreground">
-                                Content placeholder - to be developed by NBCC.
-                              </p>
-                            </div>
-
-                            {/* Dynamic Sections */}
-                            {pillar.sections.map((section, idx) => (
-                              <div key={idx}>
-                                <h4 className="text-lg font-semibold text-foreground mb-2">
-                                  {section.title}
-                                </h4>
-                                <p className="text-muted-foreground">{section.content}</p>
-                              </div>
-                            ))}
-
-                            {/* Impact Stories */}
-                            <div className="bg-background/50 rounded-lg p-6">
-                              <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
-                                <Quote className="w-5 h-5 text-primary" />
-                                Impact Stories
-                              </h4>
-                              <p className="text-muted-foreground italic">
-                                "Quotes from beneficiaries - Content to be developed by NBCC."
-                              </p>
-                            </div>
-
-                            {/* Partners */}
-                            <div className="bg-background/50 rounded-lg p-6">
-                              <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
-                                <Users className="w-5 h-5 text-secondary" />
-                                Partners
-                              </h4>
-                              <p className="text-muted-foreground italic">
-                                "Quotes from partners - Content to be developed by NBCC."
-                              </p>
-                            </div>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  </div>
+          <h3 className="text-3xl font-bold text-foreground text-center mb-12">Our Core Values</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <Card key={index} className="p-6 text-center shadow-medium hover:shadow-strong transition-all duration-300 group">
+                <div className={`flex justify-center mb-4 ${value.color} group-hover:scale-110 transition-transform duration-300`}>
+                  {value.icon}
                 </div>
+                <h4 className="text-xl font-bold text-foreground mb-2">{value.title}</h4>
+                <p className="text-muted-foreground font-medium">{value.description}</p>
               </Card>
             ))}
           </div>
         </div>
 
-        {/* Section 3: Postcard to Our Future */}
-        <Card className="p-8 md:p-12 shadow-medium bg-gradient-to-br from-accent/5 to-primary/5 text-center animate-fade-in">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <h2 className="text-3xl font-bold text-foreground">Postcard to Our Future</h2>
-              <Badge variant="secondary" className="text-sm">Coming Soon</Badge>
+        {/* Staff Gallery */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-foreground text-center mb-12">Our Staff</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {staffMembers.map((staff) => (
+              <HoverCard key={staff.id}>
+                <HoverCardTrigger>
+                  <div className="cursor-pointer group">
+                    <div className="aspect-square bg-muted rounded-lg mb-3 flex items-center justify-center group-hover:ring-2 group-hover:ring-primary transition-all">
+                      <Users className="w-12 h-12 text-muted-foreground" />
+                    </div>
+                    <p className="text-sm font-semibold text-center text-foreground">{staff.name}</p>
+                    <p className="text-xs text-muted-foreground text-center">{staff.role}</p>
+                  </div>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-foreground">{staff.name}</h4>
+                    <p className="text-sm text-muted-foreground">{staff.role}</p>
+                    <p className="text-sm text-foreground italic">"{staff.bio}"</p>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button variant="outline" onClick={() => navigate('/gallery')}>
+              View Full Staff Gallery
+            </Button>
+          </div>
+        </div>
+
+        {/* Our Team */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-foreground text-center mb-12">Our Team</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member) => (
+              <Card key={member.id} className="p-6 text-center shadow-medium hover:shadow-strong transition-all duration-300">
+                <div className="bg-muted rounded-full w-32 h-32 mx-auto mb-4 flex items-center justify-center">
+                  <Users className="w-16 h-16 text-muted-foreground" />
+                </div>
+                <h4 className="text-lg font-bold text-foreground">{member.name}</h4>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Where We Work */}
+        <Card className="p-8 mb-16 shadow-medium">
+          <h3 className="text-2xl font-bold text-foreground text-center mb-8">Where We Work</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-xl font-semibold text-foreground mb-4">Provinces & Communities</h4>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <span className="text-muted-foreground">Eastern Cape - Rural communities and schools</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <span className="text-muted-foreground">Western Cape - Urban and peri-urban areas</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <span className="text-muted-foreground">Limpopo - Agricultural communities</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <span className="text-muted-foreground">KwaZulu-Natal - Coastal and rural regions</span>
+                </li>
+              </ul>
+              <Button variant="secondary" className="mt-6 group">
+                <MapPin className="w-5 h-5 mr-2" />
+                Explore Interactive Map
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
             </div>
-            <div className="w-24 h-1 bg-gradient-secondary mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Intro to be developed — content coming soon.
-            </p>
-            <p className="text-sm text-muted-foreground/70 mt-4">
-              This section will showcase our vision for the future and the lasting impact we aim to create.
-            </p>
+            <div className="bg-muted rounded-lg aspect-square flex items-center justify-center overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3586.1!2d27.8!3d-26.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDQyJzAwLjAiUyAyN8KwNDgnMDAuMCJF!5e0!3m2!1sen!2sza!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Coverage Areas and Project Locations"
+              />
+            </div>
           </div>
         </Card>
+
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-4 justify-center">
+          <Button variant="secondary" size="lg" className="group">
+            <FileText className="w-5 h-5 mr-2" />
+            Download Annual Report
+            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </div>
       </div>
     </div>
   );
