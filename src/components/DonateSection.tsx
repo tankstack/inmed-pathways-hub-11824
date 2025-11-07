@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, Heart, Users, Briefcase, CreditCard, HandHeart, UserPlus } from "lucide-react";
+import { ArrowRight, Heart, Users, CreditCard, HandHeart, UserPlus, Calendar as CalendarIcon } from "lucide-react";
 
 const DonateSection = () => {
   return (
@@ -32,15 +32,38 @@ const DonateSection = () => {
             <div className="grid md:grid-cols-2 gap-4">
               <Button variant="cta" size="lg" className="w-full group">
                 <Heart className="w-5 h-5 mr-2" />
-                Donate Once
+                Donate Locally
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="secondary" size="lg" className="w-full group">
                 <HandHeart className="w-5 h-5 mr-2" />
-                Donate Monthly
+                Donate Internationally
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
+          </div>
+        </Card>
+
+        {/* Volunteer Section */}
+        <Card className="p-8 mb-12 shadow-medium">
+          <div className="text-center mb-8">
+            <UserPlus className="w-12 h-12 text-primary mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-foreground mb-4">Volunteer</h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Join our team of dedicated volunteers and make a direct impact in communities across Southern Africa.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="secondary" size="lg" className="group">
+              <UserPlus className="w-5 h-5 mr-2" />
+              Volunteer / Work With Us
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+            <Button variant="secondary" size="lg" className="group">
+              <CalendarIcon className="w-5 h-5 mr-2" />
+              Events / Webinars
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </div>
         </Card>
 

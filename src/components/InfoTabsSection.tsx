@@ -25,7 +25,7 @@ const InfoTabsSection = () => {
               News & Resources
             </TabsTrigger>
             <TabsTrigger value="donate" className="text-sm lg:text-base font-semibold">
-              Donate
+              Get Involved
             </TabsTrigger>
             <TabsTrigger value="contact" className="text-sm lg:text-base font-semibold">
               Contact

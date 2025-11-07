@@ -51,7 +51,7 @@ const Navigation = ({ activeTab, onTabChange }: NavigationProps) => {
 
           {/* Login Button & Mobile Menu */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <Button variant="default" size="sm" onClick={() => navigate("/admin")}>
+            <Button variant="default" size="sm" onClick={() => navigate("/auth")}>
               Login
             </Button>
             <Button 

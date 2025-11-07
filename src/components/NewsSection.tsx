@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { ArrowRight, Calendar as CalendarIcon, FileText, GraduationCap } from "lucide-react";
 
 const NewsSection = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const newsItems = [
     {
       id: 1,
@@ -134,51 +131,27 @@ const NewsSection = () => {
           </div>
         </Card>
 
-        {/* Interactive Calendar & Search */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card className="p-8 shadow-medium">
-            <h3 className="text-xl font-bold text-foreground mb-6">Events Calendar</h3>
-            <div className="flex justify-center">
-              <Calendar
-                mode="single"
-                selected={selectedDate}
-                onSelect={setSelectedDate}
-                className="rounded-lg border border-border"
-              />
+        {/* Search Resources */}
+        <Card className="p-8 shadow-medium">
+          <h3 className="text-xl font-bold text-foreground mb-6">Search Resources</h3>
+          <div className="space-y-4">
+            <input 
+              type="text" 
+              placeholder="Search articles, resources..." 
+              className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+            <div className="flex flex-wrap gap-2">
+              {['All', 'News', 'Reports', 'Toolkits', 'Events'].map((filter) => (
+                <Button key={filter} variant="outline" size="sm">
+                  {filter}
+                </Button>
+              ))}
             </div>
-            {selectedDate && (
-              <div className="mt-4 text-center text-sm text-muted-foreground">
-                Selected: {selectedDate.toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </div>
-            )}
-          </Card>
-
-          <Card className="p-8 shadow-medium">
-            <h3 className="text-xl font-bold text-foreground mb-6">Search Resources</h3>
-            <div className="space-y-4">
-              <input 
-                type="text" 
-                placeholder="Search articles, resources..." 
-                className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <div className="flex flex-wrap gap-2">
-                {['All', 'News', 'Reports', 'Toolkits', 'Events'].map((filter) => (
-                  <Button key={filter} variant="outline" size="sm">
-                    {filter}
-                  </Button>
-                ))}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                <p>Total Downloads: 1,234</p>
-              </div>
+            <div className="text-sm text-muted-foreground">
+              <p>Total Downloads: 1,234</p>
             </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
       </div>
     </div>
   );

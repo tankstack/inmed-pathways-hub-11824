@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sprout, Apple, TreePine, Briefcase, Users2, MapPin, Image, Heart } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { ArrowRight, Sprout, Apple, TreePine, Briefcase, Users2, Image } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const WorkSection = () => {
@@ -10,37 +11,57 @@ const WorkSection = () => {
     {
       icon: <Sprout className="w-8 h-8" />,
       title: "Adaptive Agriculture for Resilience",
-      description: "Community projects and capacity building through innovative school gardens and sustainable farming practices that ensure food security.",
+      description: "NBCC to develop the content - Description of Pillar",
       color: "text-success",
-      bgGradient: "from-success/10 to-success/5"
+      bgGradient: "from-success/10 to-success/5",
+      readMoreContent: {
+        subtitle: "Community Projects, Capacity Building (School Gardens), Quotes from Funders",
+        content: "NBCC to develop content"
+      }
     },
     {
       icon: <Apple className="w-8 h-8" />,
       title: "Nutrition & Healthy Lifestyles",
-      description: "Health in Action programs providing school community nutrition support, chronic illness prevention, and wellness education.",
+      description: "NBCC to develop the content - Description of Pillar",
       color: "text-accent",
-      bgGradient: "from-accent/10 to-accent/5"
+      bgGradient: "from-accent/10 to-accent/5",
+      readMoreContent: {
+        subtitle: "Health in Action, School community nutrition support, Chronic illness prevention",
+        content: "NBCC to develop content"
+      }
     },
     {
       icon: <TreePine className="w-8 h-8" />,
       title: "Climate-Smart Livelihoods",
-      description: "Climate adaptation initiatives focused on women and youth empowerment through sustainable environmental practices.",
+      description: "NBCC to develop the content - Description of Pillar",
       color: "text-secondary",
-      bgGradient: "from-secondary/10 to-secondary/5"
+      bgGradient: "from-secondary/10 to-secondary/5",
+      readMoreContent: {
+        subtitle: "Climate adaptations, Women/Youth Empowerment",
+        content: "NBCC to develop content"
+      }
     },
     {
       icon: <Briefcase className="w-8 h-8" />,
       title: "Employment Creation",
-      description: "Social employment opportunities and skills development programs that create sustainable livelihood pathways.",
+      description: "NBCC to develop the content - Description of Pillar",
       color: "text-primary",
-      bgGradient: "from-primary/10 to-primary/5"
+      bgGradient: "from-primary/10 to-primary/5",
+      readMoreContent: {
+        subtitle: "Social Employment",
+        content: "NBCC to develop content"
+      }
     },
     {
       icon: <Users2 className="w-8 h-8" />,
       title: "Social Entrepreneurship",
-      description: "Supporting community-led businesses and social enterprises that generate income and create local employment.",
+      description: "NBCC to develop the content - Description of Pillar",
       color: "text-accent",
-      bgGradient: "from-accent/10 to-accent/5"
+      bgGradient: "from-accent/10 to-accent/5",
+      readMoreContent: {
+        subtitle: "INMED Aquaponics Social Enterprises",
+        content: "NBCC to develop content"
+      }
     }
   ];
 
@@ -59,35 +80,77 @@ const WorkSection = () => {
           </p>
         </div>
 
-        {/* Core Programs */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {/* Core Programs - Stacked Vertical Layout */}
+        <div className="space-y-6 mb-16">
           {programs.map((program, index) => (
-            <Card key={index} className={`p-8 shadow-medium hover:shadow-strong transition-all duration-300 group bg-gradient-to-br ${program.bgGradient}`}>
-              <div className={`flex justify-center mb-6 ${program.color} group-hover:scale-110 transition-transform duration-300`}>
-                {program.icon}
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-4 text-center">
-                {program.title}
-              </h3>
-              <p className="text-muted-foreground text-center leading-relaxed mb-6">
-                {program.description}
-              </p>
-              <div className="flex gap-2 justify-center flex-wrap">
-                <Button variant="ghost" size="sm" className="group/btn">
-                  Read More
-                  <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-                <Button variant="ghost" size="sm" className="group/btn" onClick={() => navigate("/gallery")}>
-                  <Image className="w-4 h-4 mr-1" />
-                  View Gallery
-                </Button>
+            <Card key={index} className={`p-8 shadow-medium hover:shadow-strong transition-all duration-300 bg-gradient-to-br ${program.bgGradient}`}>
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className={`flex-shrink-0 ${program.color}`}>
+                  {program.icon}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">
+                    {program.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    {program.description}
+                  </p>
+                  
+                  <Accordion type="single" collapsible className="w-full mb-6">
+                    <AccordionItem value="intro">
+                      <AccordionTrigger>Introduction</AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-muted-foreground">NBCC to develop the content - Intro</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="goals">
+                      <AccordionTrigger>Goals</AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-muted-foreground">NBCC to develop the content - Goals</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="activities">
+                      <AccordionTrigger>Key Activities</AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-muted-foreground">NBCC to develop the content - Key Activities</p>
+                        <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+                          <p className="font-semibold text-foreground mb-2">{program.readMoreContent.subtitle}</p>
+                          <p className="text-sm text-muted-foreground">{program.readMoreContent.content}</p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="impact">
+                      <AccordionTrigger>Impact Stories</AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-muted-foreground italic">NBCC to develop the content - Quotes from beneficiaries</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="partners">
+                      <AccordionTrigger>Partnership Testimonials</AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-muted-foreground italic">NBCC to develop the content - Quotes from partners</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+
+                  <div className="flex gap-2 flex-wrap">
+                    <Button variant="ghost" size="sm" className="group/btn">
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="group/btn" onClick={() => navigate("/gallery")}>
+                      <Image className="w-4 h-4 mr-1" />
+                      View Gallery
+                    </Button>
+                  </div>
+                </div>
               </div>
             </Card>
           ))}
         </div>
 
         {/* Photo/Video Gallery Placeholder */}
-        <Card className="p-8 mb-16 shadow-medium">
+        <Card className="p-8 shadow-medium">
           <h3 className="text-2xl font-bold text-foreground text-center mb-8">Program Gallery</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -107,20 +170,6 @@ const WorkSection = () => {
             </Button>
           </div>
         </Card>
-
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Button variant="secondary" size="lg" className="group">
-            <Users2 className="w-5 h-5 mr-2" />
-            Partner With Us
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button variant="cta" size="lg" className="group">
-            <Heart className="w-5 h-5 mr-2" />
-            Donate to This Program
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </div>
       </div>
     </div>
   );
