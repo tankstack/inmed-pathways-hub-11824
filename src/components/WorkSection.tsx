@@ -108,34 +108,6 @@ const WorkSection = () => {
           </div>
         </Card>
 
-        {/* Map Overlay Placeholder */}
-        <Card className="p-8 mb-16 shadow-medium">
-          <h3 className="text-2xl font-bold text-foreground text-center mb-8">Program Coverage</h3>
-          <div className="bg-muted rounded-lg aspect-video flex items-center justify-center overflow-hidden">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3586.1!2d27.8!3d-26.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDQyJzAwLjAiUyAyN8KwNDgnMDAuMCJF!5e0!3m2!1sen!2sza!4v1234567890"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Program Coverage Map"
-            />
-          </div>
-          <div className="text-center mt-6">
-            <Button 
-              variant="secondary" 
-              className="group"
-              onClick={() => window.open('https://www.google.com/maps/search/?api=1&query=Eastern+Cape+South+Africa', '_blank')}
-            >
-              <MapPin className="w-5 h-5 mr-2" />
-              Explore Map
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
-        </Card>
-
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4 justify-center">
           <Button variant="secondary" size="lg" className="group">

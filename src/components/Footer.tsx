@@ -4,33 +4,31 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "luc
 
 const Footer = () => {
   const footerLinks = {
-    "About Us": [
+    "INMED Details": [
       "Our Story",
-      "Our Team",
-      "Where We Work",
-      "Impact Reports",
-      "Careers"
+      "Our Vision",
+      "Our Mission",
+      "Our Values",
+      "Impact Reports"
     ],
-    "Our Work": [
-      "Adaptive Agriculture",
-      "Nutrition & Health",
-      "Climate Livelihoods",
-      "Employment Creation",
-      "Social Enterprise"
-    ],
-    "Resources": [
-      "News & Updates",
-      "Training Portal",
-      "Downloads",
-      "Newsletter Archive",
-      "Research"
+    "Site Map": [
+      "Home",
+      "About Us",
+      "Our Work",
+      "News and Updates",
+      "Contact"
     ],
     "Get Involved": [
       "Donate",
-      "Partner With Us",
+      "Partner with us",
       "Volunteer",
-      "Events",
-      "Contact Us"
+      "Events"
+    ],
+    "Connect": [
+      "Facebook",
+      "LinkedIn",
+      "Instagram",
+      "TikTok"
     ]
   };
 

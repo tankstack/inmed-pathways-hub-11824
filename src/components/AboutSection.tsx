@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 import { ArrowRight, Target, Heart, Users, Shield, Lightbulb, Zap, MapPin, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -138,9 +139,9 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Staff Gallery */}
+        {/* Board Gallery */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold text-foreground text-center mb-12">Our Staff</h3>
+          <h3 className="text-3xl font-bold text-foreground text-center mb-12">Our Board</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {staffMembers.map((staff) => (
               <HoverCard key={staff.id}>
@@ -165,7 +166,7 @@ const AboutSection = () => {
           </div>
           <div className="text-center mt-8">
             <Button variant="outline" onClick={() => navigate('/gallery')}>
-              View Full Staff Gallery
+              View Full Board Gallery
             </Button>
           </div>
         </div>
@@ -182,6 +183,11 @@ const AboutSection = () => {
                 <h4 className="text-lg font-bold text-foreground">{member.name}</h4>
               </Card>
             ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button variant="outline" onClick={() => navigate('/gallery')}>
+              View Team
+            </Button>
           </div>
         </div>
 
@@ -209,11 +215,6 @@ const AboutSection = () => {
                   <span className="text-muted-foreground">KwaZulu-Natal - Coastal and rural regions</span>
                 </li>
               </ul>
-              <Button variant="secondary" className="mt-6 group">
-                <MapPin className="w-5 h-5 mr-2" />
-                Explore Interactive Map
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
             </div>
             <div className="bg-muted rounded-lg aspect-square flex items-center justify-center overflow-hidden">
               <iframe
@@ -230,6 +231,16 @@ const AboutSection = () => {
           </div>
         </Card>
 
+        {/* Postcard to Our Future */}
+        <Card className="p-8 mb-16 shadow-medium bg-gradient-to-br from-accent/5 to-accent/10 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <h3 className="text-2xl font-bold text-foreground">Postcard to Our Future</h3>
+            <Badge variant="secondary" className="text-xs">Coming Soon</Badge>
+          </div>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            A vision of what we aspire to achieve — content to be developed.
+          </p>
+        </Card>
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4 justify-center">

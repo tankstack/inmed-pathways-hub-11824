@@ -96,10 +96,14 @@ const Gallery = () => {
       {/* Gallery Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsList className="grid w-full grid-cols-4 mb-8">
             <TabsTrigger value="staff" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
               Staff Team
+            </TabsTrigger>
+            <TabsTrigger value="board" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Board
             </TabsTrigger>
             <TabsTrigger value="programs" className="flex items-center gap-2">
               <ImageIcon className="h-4 w-4" />
@@ -121,7 +125,7 @@ const Gallery = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {staffMembers.map((member) => (
                     <Card key={member.id} className="overflow-hidden hover:shadow-medium transition-shadow group">
                       <div className="aspect-square bg-muted relative overflow-hidden">
@@ -131,12 +135,40 @@ const Gallery = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <CardContent className="p-4">
-                        <h3 className="font-semibold text-lg">{member.name}</h3>
-                        <p className="text-sm text-muted-foreground mb-2">{member.role}</p>
-                        <p className="text-xs text-muted-foreground italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          "{member.bio}"
-                        </p>
+                      <CardContent className="p-3">
+                        <h3 className="font-semibold text-sm">{member.name}</h3>
+                        <p className="text-xs text-muted-foreground">{member.role}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Board Gallery */}
+          <TabsContent value="board" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Our Board</CardTitle>
+                <CardDescription>
+                  Meet the dedicated board members guiding our mission
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {staffMembers.map((member) => (
+                    <Card key={member.id} className="overflow-hidden hover:shadow-medium transition-shadow group">
+                      <div className="aspect-square bg-muted relative overflow-hidden">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <CardContent className="p-3">
+                        <h3 className="font-semibold text-sm">{member.name}</h3>
+                        <p className="text-xs text-muted-foreground">Board Member</p>
                       </CardContent>
                     </Card>
                   ))}
@@ -155,7 +187,7 @@ const Gallery = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {programImages.map((program) => (
                     <Card key={program.id} className="overflow-hidden hover:shadow-medium transition-shadow group">
                       <div className="aspect-video bg-muted relative overflow-hidden">
@@ -165,13 +197,13 @@ const Gallery = () => {
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute top-2 right-2">
-                          <span className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-medium">
+                          <span className="bg-accent text-accent-foreground px-2 py-0.5 rounded-full text-xs font-medium">
                             {program.category}
                           </span>
                         </div>
                       </div>
-                      <CardContent className="p-4">
-                        <h3 className="font-semibold text-lg">{program.title}</h3>
+                      <CardContent className="p-3">
+                        <h3 className="font-semibold text-sm">{program.title}</h3>
                       </CardContent>
                     </Card>
                   ))}
@@ -190,7 +222,7 @@ const Gallery = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {eventImages.map((event) => (
                     <Card key={event.id} className="overflow-hidden hover:shadow-medium transition-shadow group">
                       <div className="aspect-video bg-muted relative overflow-hidden">
@@ -200,9 +232,9 @@ const Gallery = () => {
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
-                      <CardContent className="p-4">
-                        <h3 className="font-semibold text-lg">{event.title}</h3>
-                        <p className="text-sm text-muted-foreground">{event.date}</p>
+                      <CardContent className="p-3">
+                        <h3 className="font-semibold text-sm">{event.title}</h3>
+                        <p className="text-xs text-muted-foreground">{event.date}</p>
                       </CardContent>
                     </Card>
                   ))}
