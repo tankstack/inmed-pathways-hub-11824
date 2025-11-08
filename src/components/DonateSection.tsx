@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, Heart, Users, CreditCard, HandHeart, UserPlus, Calendar as CalendarIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const DonateSection = () => {
+  const navigate = useNavigate();
+  
   return (
     <div id="donate" className="py-8">
       <div className="max-w-7xl mx-auto">
@@ -59,7 +62,12 @@ const DonateSection = () => {
               Volunteer / Work With Us
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="secondary" size="lg" className="group">
+            <Button 
+              variant="secondary" 
+              size="lg" 
+              className="group"
+              onClick={() => navigate("/gallery?tab=events")}
+            >
               <CalendarIcon className="w-5 h-5 mr-2" />
               Events / Webinars
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
