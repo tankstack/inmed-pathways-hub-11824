@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, Youtube } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   const footerLinks = {
@@ -66,11 +67,15 @@ const Footer = () => {
 
               {/* Social Links */}
               <div className="flex space-x-4">
-                <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-secondary">
-                  <Facebook className="w-5 h-5" />
-                </Button>
-                <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-secondary">
-                  <Twitter className="w-5 h-5" />
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-primary-foreground hover:text-secondary"
+                  asChild
+                >
+                  <a href="https://www.facebook.com/share/1AxhfgjkCC/" target="_blank" rel="noopener noreferrer">
+                    <Facebook className="w-5 h-5" />
+                  </a>
                 </Button>
                 <Button 
                   variant="ghost" 
@@ -78,12 +83,39 @@ const Footer = () => {
                   className="text-primary-foreground hover:text-secondary"
                   asChild
                 >
-                  <a href="https://www.instagram.com/inmed_south_africa?igsh=MWNtM3d6N250bzd4ZQ==" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.instagram.com/inmed_south_africa?igsh=MWl4cml1Nmw3OW95eg==" target="_blank" rel="noopener noreferrer">
                     <Instagram className="w-5 h-5" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="icon" className="text-primary-foreground hover:text-secondary">
-                  <Linkedin className="w-5 h-5" />
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-primary-foreground hover:text-secondary"
+                  asChild
+                >
+                  <a href="https://youtube.com/@inmedforchildren?si=BNc_gxllKG_y6zBZ" target="_blank" rel="noopener noreferrer">
+                    <Youtube className="w-5 h-5" />
+                  </a>
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-primary-foreground hover:text-secondary"
+                  asChild
+                >
+                  <a href="https://www.tiktok.com/@inmed_sa?_t=ZS-8zEB9Gnh1V3&_r=1" target="_blank" rel="noopener noreferrer">
+                    <FaTiktok className="w-5 h-5" />
+                  </a>
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-primary-foreground hover:text-secondary"
+                  asChild
+                >
+                  <a href="https://www.linkedin.com/in/inmed-south-africa-410474353?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="w-5 h-5" />
+                  </a>
                 </Button>
               </div>
             </div>
@@ -93,16 +125,44 @@ const Footer = () => {
               <div key={title} className="space-y-4">
                 <h4 className="text-lg font-semibold">{title}</h4>
                 <ul className="space-y-2">
-                  {links.map((link) => (
-                    <li key={link}>
-                      <a 
-                        href="#" 
-                        className="text-primary-foreground/80 hover:text-secondary transition-colors text-sm"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
+                  {links.map((link) => {
+                    const linkMap: { [key: string]: string } = {
+                      "Our Story": "#about",
+                      "Our Vision": "#about",
+                      "Our Mission": "#about",
+                      "Our Values": "#about",
+                      "Impact Reports": "#about",
+                      "Home": "/",
+                      "About Us": "#about",
+                      "Our Work": "#work",
+                      "News and Updates": "#news",
+                      "Contact": "#contact",
+                      "Donate": "#donate",
+                      "Partner with us": "#contact",
+                      "Volunteer": "#donate",
+                      "Events": "#news",
+                      "Facebook": "https://www.facebook.com/share/1AxhfgjkCC/",
+                      "LinkedIn": "https://www.linkedin.com/in/inmed-south-africa-410474353?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+                      "Instagram": "https://www.instagram.com/inmed_south_africa?igsh=MWl4cml1Nmw3OW95eg==",
+                      "TikTok": "https://www.tiktok.com/@inmed_sa?_t=ZS-8zEB9Gnh1V3&_r=1"
+                    };
+                    
+                    const href = linkMap[link] || "#";
+                    const isExternal = href.startsWith("http");
+                    
+                    return (
+                      <li key={link}>
+                        <a 
+                          href={href}
+                          target={isExternal ? "_blank" : undefined}
+                          rel={isExternal ? "noopener noreferrer" : undefined}
+                          className="text-primary-foreground/80 hover:text-secondary transition-colors text-sm"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, Mail, LogIn } from "lucide-react";
+import inmedLogo from "@/assets/inmed-logo.png";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -23,8 +24,8 @@ const Auth = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-8 shadow-strong">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Lock className="w-8 h-8 text-primary" />
+          <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-4">
+            <img src={inmedLogo} alt="INMED Logo" className="w-full h-full object-contain" />
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Welcome Back

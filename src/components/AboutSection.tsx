@@ -87,10 +87,12 @@ const AboutSection = () => {
   ];
 
   const teamMembers = [
-    { id: 1, name: "Alice Thompson" },
-    { id: 2, name: "Robert Miller" },
-    { id: 3, name: "Lisa Anderson" },
-    { id: 4, name: "James Wilson" }
+    { id: 1, name: "John Doe" },
+    { id: 2, name: "Jane Smith" },
+    { id: 3, name: "Mike Johnson" },
+    { id: 4, name: "Sarah Williams" },
+    { id: 5, name: "David Brown" },
+    { id: 6, name: "Emily Davis" }
   ];
 
   return (
@@ -165,7 +167,7 @@ const AboutSection = () => {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Button variant="outline" onClick={() => navigate('/gallery')}>
+            <Button variant="outline" onClick={() => navigate('/gallery?tab=board')}>
               View Full Board Gallery
             </Button>
           </div>
@@ -174,18 +176,18 @@ const AboutSection = () => {
         {/* Our Team */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-foreground text-center mb-12">Our Team</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
             {teamMembers.map((member) => (
               <Card key={member.id} className="p-6 text-center shadow-medium hover:shadow-strong transition-all duration-300">
-                <div className="bg-muted rounded-full w-32 h-32 mx-auto mb-4 flex items-center justify-center">
-                  <Users className="w-16 h-16 text-muted-foreground" />
+                <div className="bg-muted rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+                  <Users className="w-12 h-12 text-muted-foreground" />
                 </div>
-                <h4 className="text-lg font-bold text-foreground">{member.name}</h4>
+                <h4 className="text-sm font-bold text-foreground">{member.name}</h4>
               </Card>
             ))}
           </div>
           <div className="text-center mt-8">
-            <Button variant="outline" onClick={() => navigate('/gallery')}>
+            <Button variant="outline" onClick={() => navigate('/gallery?tab=staff')}>
               View Team
             </Button>
           </div>
