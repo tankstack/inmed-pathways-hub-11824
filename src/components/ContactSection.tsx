@@ -2,7 +2,10 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Clock, Send, Facebook, Linkedin, Instagram } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Mail, Phone, MapPin, Clock, Send, Facebook, Linkedin, Instagram, Youtube } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
 const ContactSection = () => {
   return (
@@ -22,6 +25,19 @@ const ContactSection = () => {
             <form className="space-y-4">
               <Input placeholder="Your Name *" required />
               <Input type="email" placeholder="Your Email *" required />
+              <div className="space-y-2">
+                <Label htmlFor="inquiry-type">Select Inquiry *</Label>
+                <Select required>
+                  <SelectTrigger id="inquiry-type">
+                    <SelectValue placeholder="Choose inquiry type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="corporate">Corporate Partnership</SelectItem>
+                    <SelectItem value="independent">Independent Collaboration</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               <Textarea placeholder="Your Message *" rows={6} required />
               <Button variant="primary" size="lg" className="w-full group">
                 <Send className="w-5 h-5 mr-2" />
@@ -72,7 +88,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground mb-2">Office Hours</h4>
-                  <p className="text-muted-foreground">Mon-Fri: [Hours]</p>
+                  <p className="text-muted-foreground">Mon-Fri: 8am to 5pm</p>
                 </div>
               </div>
             </Card>
@@ -106,9 +122,16 @@ const ContactSection = () => {
           <Card className="p-8 shadow-medium">
             <h3 className="text-xl font-bold text-foreground mb-6">Follow Us</h3>
             <div className="space-y-3 mb-6">
-              <Button variant="outline" className="w-full justify-start" size="lg">
-                <Facebook className="w-5 h-5 mr-3" />
-                Facebook
+              <Button 
+                variant="outline" 
+                className="w-full justify-start" 
+                size="lg"
+                asChild
+              >
+                <a href="https://www.facebook.com/share/1AxhfgjkCC/" target="_blank" rel="noopener noreferrer">
+                  <Facebook className="w-5 h-5 mr-3" />
+                  Facebook
+                </a>
               </Button>
               <Button 
                 variant="outline" 
@@ -116,14 +139,43 @@ const ContactSection = () => {
                 size="lg"
                 asChild
               >
-                <a href="https://www.instagram.com/inmed_south_africa?igsh=MWNtM3d6N250bzd4ZQ==" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/inmed_south_africa?igsh=MWl4cml1Nmw3OW95eg==" target="_blank" rel="noopener noreferrer">
                   <Instagram className="w-5 h-5 mr-3" />
                   Instagram
                 </a>
               </Button>
-              <Button variant="outline" className="w-full justify-start" size="lg">
-                <Linkedin className="w-5 h-5 mr-3" />
-                LinkedIn
+              <Button 
+                variant="outline" 
+                className="w-full justify-start" 
+                size="lg"
+                asChild
+              >
+                <a href="https://youtube.com/@inmedforchildren?si=BNc_gxllKG_y6zBZ" target="_blank" rel="noopener noreferrer">
+                  <Youtube className="w-5 h-5 mr-3" />
+                  YouTube
+                </a>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="w-full justify-start" 
+                size="lg"
+                asChild
+              >
+                <a href="https://www.tiktok.com/@inmed_sa?_t=ZS-8zEB9Gnh1V3&_r=1" target="_blank" rel="noopener noreferrer">
+                  <FaTiktok className="w-5 h-5 mr-3" />
+                  TikTok
+                </a>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="w-full justify-start" 
+                size="lg"
+                asChild
+              >
+                <a href="https://www.linkedin.com/in/inmed-south-africa-410474353?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="w-5 h-5 mr-3" />
+                  LinkedIn
+                </a>
               </Button>
             </div>
             <Input type="email" placeholder="Subscribe to newsletter" />
