@@ -123,13 +123,8 @@ const NewsSection = () => {
               </div>
             ))}
           </div>
-          <div className="text-center mt-6">
-            <Button variant="secondary" className="group">
-              Access Training Portal
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
         </Card>
+        
 
         {/* Search Resources */}
         <Card className="p-8 shadow-medium">
