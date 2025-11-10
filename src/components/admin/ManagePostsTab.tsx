@@ -1,22 +1,22 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Edit, Trash2, Upload } from "lucide-react";
+import { Plus, Edit, Trash2, FileText, Download, Upload } from "lucide-react";
 
-const ManagePostsTab = () => {
+const ManageResourcesTab = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [editingPost, setEditingPost] = useState<number | null>(null);
+  const [editingResource, setEditingResource] = useState<number | null>(null);
   
   // Placeholder data
-  const posts = [
-    { id: 1, title: "Community Garden Initiative Launch", category: "News", status: "published", date: "2024-01-15" },
-    { id: 2, title: "Nutrition Workshop Success", category: "Updates", status: "published", date: "2024-01-10" },
-    { id: 3, title: "New Partnership Announcement", category: "News", status: "published", date: "2024-01-05" },
+  const resources = [
+    { id: 1, title: "Nutrition Guide 2024", type: "PDF", category: "Guides", downloads: 45, status: "published" },
+    { id: 2, title: "Training Manual", type: "PDF", category: "Training", downloads: 32, status: "published" },
+    { id: 3, title: "Annual Report 2023", type: "PDF", category: "Reports", downloads: 87, status: "published" },
   ];
 
   return (
@@ -24,57 +24,51 @@ const ManagePostsTab = () => {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Manage Posts & News</CardTitle>
-            <CardDescription>Create and manage news articles and blog posts</CardDescription>
+            <CardTitle>Resource Library</CardTitle>
+            <CardDescription>Upload and manage downloadable resources</CardDescription>
           </div>
           <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
+              <Button className="bg-brand-teal hover:opacity-90 text-white">
                 <Plus className="w-4 h-4 mr-2" />
-                New Post
+                Upload Resource
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="max-w-lg">
               <DialogHeader>
-                <DialogTitle>Create New Post</DialogTitle>
-                <DialogDescription>Add a new post or news article</DialogDescription>
+                <DialogTitle>Upload New Resource</DialogTitle>
+                <DialogDescription>Add a new resource to the library</DialogDescription>
               </DialogHeader>
               <div className="space-y-4 py-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Title</Label>
-                  <Input id="title" placeholder="Enter post title" />
+                  <Label htmlFor="resource-title">Title</Label>
+                  <Input id="resource-title" placeholder="Enter resource title" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="resource-category">Category</Label>
                   <Select>
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="project">Project (shows on Home page)</SelectItem>
-                      <SelectItem value="board">Board (shows on About Us & Board Gallery)</SelectItem>
-                      <SelectItem value="team">Team (shows on Team & Team Gallery)</SelectItem>
-                      <SelectItem value="program">Program (shows on Our Work & Program Gallery)</SelectItem>
-                      <SelectItem value="news">News</SelectItem>
-                      <SelectItem value="updates">Updates</SelectItem>
+                      <SelectItem value="impact-report">Impact Report</SelectItem>
+                      <SelectItem value="training-toolkit">Training Toolkit</SelectItem>
+                      <SelectItem value="research-publication">Research Publication</SelectItem>
+                      <SelectItem value="curriculum-material">Curriculum Material</SelectItem>
+                      <SelectItem value="newsletter">Newsletter</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea id="description" placeholder="Enter post description" rows={6} />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="image">Upload Image</Label>
+                  <Label htmlFor="resource-file">Upload File</Label>
                   <div className="flex items-center gap-2">
-                    <Input id="image" type="file" accept="image/*" />
+                    <Input id="resource-file" type="file" />
                     <Upload className="w-5 h-5 text-muted-foreground" />
                   </div>
-                  <p className="text-xs text-muted-foreground">At least one image required</p>
                 </div>
                 <div className="flex justify-end gap-2 pt-4">
                   <Button variant="outline" onClick={() => setIsCreateOpen(false)}>Cancel</Button>
-                  <Button className="bg-brand-green hover:bg-brand-green-dark text-white">Create Post</Button>
+                  <Button className="bg-brand-teal hover:opacity-90 text-white">Upload Resource</Button>
                 </div>
               </div>
             </DialogContent>
@@ -83,68 +77,70 @@ const ManagePostsTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {posts.map((post) => (
-            <div key={post.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
-              <div className="flex-1">
-                <h4 className="font-semibold text-foreground">{post.title}</h4>
-                <div className="flex items-center gap-3 mt-2">
-                  <Badge variant="outline" className="text-xs">{post.category}</Badge>
-                  <Badge 
-                    variant="outline" 
-                    className={post.status === "published" ? "bg-brand-green/10 text-brand-green border-brand-green/20" : "bg-muted"}
-                  >
-                    {post.status}
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">{post.date}</span>
+          {resources.map((resource) => (
+            <div key={resource.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
+              <div className="flex items-start gap-3 flex-1">
+                <FileText className="w-5 h-5 text-brand-teal mt-1" />
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground">{resource.title}</h4>
+                  <div className="flex items-center gap-3 mt-2 flex-wrap">
+                    <Badge variant="outline" className="text-xs">{resource.type}</Badge>
+                    <Badge variant="outline" className="text-xs">{resource.category}</Badge>
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Download className="w-3 h-3" />
+                      {resource.downloads} downloads
+                    </span>
+                    <Badge 
+                      variant="outline" 
+                      className="bg-brand-teal/10 text-brand-teal border-brand-teal/20"
+                    >
+                      {resource.status}
+                    </Badge>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Dialog open={editingPost === post.id} onOpenChange={(open) => setEditingPost(open ? post.id : null)}>
+                <Dialog open={editingResource === resource.id} onOpenChange={(open) => setEditingResource(open ? resource.id : null)}>
                   <DialogTrigger asChild>
                     <Button variant="ghost" size="sm">
                       <Edit className="w-4 h-4" />
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                  <DialogContent className="max-w-lg">
                     <DialogHeader>
-                      <DialogTitle>Edit Post</DialogTitle>
-                      <DialogDescription>Update post details</DialogDescription>
+                      <DialogTitle>Edit Resource</DialogTitle>
+                      <DialogDescription>Update resource details</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
                       <div className="space-y-2">
-                        <Label htmlFor="edit-title">Title</Label>
-                        <Input id="edit-title" defaultValue={post.title} />
+                        <Label htmlFor="edit-resource-title">Title</Label>
+                        <Input id="edit-resource-title" defaultValue={resource.title} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="edit-category">Category</Label>
-                        <Select defaultValue={post.category.toLowerCase()}>
+                        <Label htmlFor="edit-resource-category">Category</Label>
+                        <Select defaultValue={resource.category.toLowerCase().replace(' ', '-')}>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="project">Project (shows on Home page)</SelectItem>
-                            <SelectItem value="board">Board (shows on About Us & Board Gallery)</SelectItem>
-                            <SelectItem value="team">Team (shows on Team & Team Gallery)</SelectItem>
-                            <SelectItem value="program">Program (shows on Our Work & Program Gallery)</SelectItem>
-                            <SelectItem value="news">News</SelectItem>
-                            <SelectItem value="updates">Updates</SelectItem>
+                            <SelectItem value="impact-report">Impact Report</SelectItem>
+                            <SelectItem value="training-toolkit">Training Toolkit</SelectItem>
+                            <SelectItem value="research-publication">Research Publication</SelectItem>
+                            <SelectItem value="curriculum-material">Curriculum Material</SelectItem>
+                            <SelectItem value="newsletter">Newsletter</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="edit-description">Description</Label>
-                        <Textarea id="edit-description" placeholder="Enter post description" rows={6} />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="edit-image">Upload New Image</Label>
+                        <Label htmlFor="edit-resource-file">Upload New File</Label>
                         <div className="flex items-center gap-2">
-                          <Input id="edit-image" type="file" accept="image/*" />
+                          <Input id="edit-resource-file" type="file" />
                           <Upload className="w-5 h-5 text-muted-foreground" />
                         </div>
                       </div>
                       <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setEditingPost(null)}>Cancel</Button>
-                        <Button className="bg-brand-green hover:bg-brand-green-dark text-white">Save Changes</Button>
+                        <Button variant="outline" onClick={() => setEditingResource(null)}>Cancel</Button>
+                        <Button className="bg-brand-teal hover:opacity-90 text-white">Save Changes</Button>
                       </div>
                     </div>
                   </DialogContent>
@@ -161,5 +157,4 @@ const ManagePostsTab = () => {
   );
 };
 
-export default ManagePostsTab;
-
+export default ManageResourcesTab;
