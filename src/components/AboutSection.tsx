@@ -1,6 +1,5 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 import { ArrowRight, Target, Heart, Users, Shield, Lightbulb, Zap, MapPin, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -87,12 +86,10 @@ const AboutSection = () => {
   ];
 
   const teamMembers = [
-    { id: 1, name: "John Doe" },
-    { id: 2, name: "Jane Smith" },
-    { id: 3, name: "Mike Johnson" },
-    { id: 4, name: "Sarah Williams" },
-    { id: 5, name: "David Brown" },
-    { id: 6, name: "Emily Davis" }
+    { id: 1, name: "Alice Thompson" },
+    { id: 2, name: "Robert Miller" },
+    { id: 3, name: "Lisa Anderson" },
+    { id: 4, name: "James Wilson" }
   ];
 
   return (
@@ -167,7 +164,7 @@ const AboutSection = () => {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Button variant="outline" onClick={() => navigate('/gallery?tab=board')}>
+            <Button variant="outline" onClick={() => navigate('/gallery')}>
               View Full Board Gallery
             </Button>
           </div>
@@ -176,74 +173,44 @@ const AboutSection = () => {
         {/* Our Team */}
         <div className="mb-16">
           <h3 className="text-3xl font-bold text-foreground text-center mb-12">Our Team</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member) => (
               <Card key={member.id} className="p-6 text-center shadow-medium hover:shadow-strong transition-all duration-300">
-                <div className="bg-muted rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                  <Users className="w-12 h-12 text-muted-foreground" />
+                <div className="bg-muted rounded-full w-32 h-32 mx-auto mb-4 flex items-center justify-center">
+                  <Users className="w-16 h-16 text-muted-foreground" />
                 </div>
-                <h4 className="text-sm font-bold text-foreground">{member.name}</h4>
+                <h4 className="text-lg font-bold text-foreground">{member.name}</h4>
               </Card>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Button variant="outline" onClick={() => navigate('/gallery?tab=staff')}>
-              View Team
-            </Button>
-          </div>
         </div>
 
-        {/* Where We Work */}
-        <Card className="p-8 mb-16 shadow-medium">
-          <h3 className="text-2xl font-bold text-foreground text-center mb-8">Where We Work</h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="text-xl font-semibold text-foreground mb-4">Provinces & Communities</h4>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <span className="text-muted-foreground">Eastern Cape - Rural communities and schools</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <span className="text-muted-foreground">Western Cape - Urban and peri-urban areas</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <span className="text-muted-foreground">Limpopo - Agricultural communities</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <span className="text-muted-foreground">KwaZulu-Natal - Coastal and rural regions</span>
-                </li>
-              </ul>
-            </div>
-            <div className="bg-muted rounded-lg aspect-square flex items-center justify-center overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3586.1!2d27.8!3d-26.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDQyJzAwLjAiUyAyN8KwNDgnMDAuMCJF!5e0!3m2!1sen!2sza!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Coverage Areas and Project Locations"
-              />
+
+
+        {/* Postcard to our future */}
+        <Card className="p-8 mb-16 shadow-medium bg-gradient-to-br from-primary/5 to-secondary/5">
+          <div className="text-center mb-8">
+            <h3 className="text-3xl font-bold text-foreground mb-4">Postcard to our Future</h3>
+            <div className="w-24 h-1 bg-gradient-primary mx-auto mb-6"></div>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+              A vision of what we aspire to achieve — our hopes, dreams, and commitments for the communities we serve.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-background rounded-lg p-8 border-2 border-dashed border-muted-foreground/30 min-h-[300px] flex items-center justify-center">
+              <div className="text-center space-y-4">
+                <Target className="w-16 h-16 text-muted-foreground mx-auto" />
+                <h4 className="text-2xl font-semibold text-foreground">Coming Soon</h4>
+                <p className="text-muted-foreground max-w-xl">
+                  This space will feature our vision statements, future goals, and the transformative 
+                  impact we're working to create for the next generation. Stay tuned for inspiring 
+                  stories of hope and progress.
+                </p>
+              </div>
             </div>
           </div>
         </Card>
-
-        {/* Postcard to Our Future */}
-        <Card className="p-8 mb-16 shadow-medium bg-gradient-to-br from-accent/5 to-accent/10 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <h3 className="text-2xl font-bold text-foreground">Postcard to Our Future</h3>
-            <Badge variant="secondary" className="text-xs">Coming Soon</Badge>
-          </div>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A vision of what we aspire to achieve — content to be developed.
-          </p>
-        </Card>
-
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4 justify-center">
           <Button variant="secondary" size="lg" className="group">
