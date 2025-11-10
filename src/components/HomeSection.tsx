@@ -213,36 +213,65 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
         {/* Featured Project */}
         <Card className="p-8 mb-16 shadow-medium bg-gradient-to-br from-secondary/5 to-accent/5">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Featured Project</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Featured Projects</h2>
             <div className="w-24 h-1 bg-gradient-secondary mx-auto"></div>
           </div>
-          <div className="grid md:grid-cols-2 gap-8 items-center transition-all duration-300">
-            <div className="space-y-4 animate-fade-in">
-              <h3 className="text-2xl font-bold text-foreground">
-                School Garden Initiative: Growing Hope & Nutrition
-              </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our adaptive agriculture program has established over 500 school gardens, providing 
-                fresh produce and nutrition education to more than 10,000 children across Eastern 
-                Cape communities. This initiative not only addresses food security but also teaches 
-                sustainable farming practices and healthy eating habits. Through hands-on learning, 
-                students develop essential skills while contributing to their community's well-being.
-              </p>
-              <Button variant="secondary" className="group">
-                Read Full Story
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </div>
-            <div className="group overflow-hidden rounded-lg aspect-video bg-muted hover-scale cursor-pointer transition-all duration-300 hover:shadow-lg animate-fade-in">
-              <div className="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                <div className="text-center p-8">
-                  <MapPin className="w-16 h-16 text-primary mx-auto mb-4 transition-transform duration-300 group-hover:scale-110" />
-                  <p className="text-muted-foreground font-semibold">Project Image Placeholder</p>
-                  <p className="text-sm text-muted-foreground/70 mt-2">Landscape format recommended</p>
+          <Carousel>
+            <CarouselContent>
+              <CarouselItem>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">
+                      Nutrition Workshop Success
+                    </h3>
+                    <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                      Our nutrition workshops have reached over 500 families, providing essential 
+                      knowledge on healthy eating, meal planning, and food preparation. Community 
+                      members are now equipped with the skills to improve their family's nutrition 
+                      and overall well-being.
+                    </p>
+                    <Button variant="secondary" className="group" onClick={() => window.location.href = '/gallery'}>
+                      View Gallery
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </div>
+                  <div className="bg-muted rounded-lg aspect-video flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <MapPin className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground font-semibold">[Project Image Placeholder]</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </CarouselItem>
+              <CarouselItem>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">
+                      New Partnership Announcement
+                    </h3>
+                    <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                      We are excited to announce our new partnership with leading organizations 
+                      committed to community development. Together, we will expand our reach and 
+                      create even greater impact in the communities we serve, bringing sustainable 
+                      solutions to vulnerable families.
+                    </p>
+                    <Button variant="secondary" className="group" onClick={() => window.location.href = '/gallery'}>
+                      View Gallery
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </div>
+                  <div className="bg-muted rounded-lg aspect-video flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <MapPin className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground font-semibold">[Project Image Placeholder]</p>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
         </Card>
 
 
