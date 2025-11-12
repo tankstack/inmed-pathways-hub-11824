@@ -6,69 +6,79 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Edit, Trash2, FileText, Download, Upload } from "lucide-react";
+import { Plus, Edit, Trash2, Shield } from "lucide-react";
 
-const ManageResourcesTab = () => {
+const UserRolesTab = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [editingResource, setEditingResource] = useState<number | null>(null);
+  const [editingUser, setEditingUser] = useState<number | null>(null);
   
   // Placeholder data
-  const resources = [
-    { id: 1, title: "Nutrition Guide 2024", type: "PDF", category: "Guides", downloads: 45, status: "published" },
-    { id: 2, title: "Training Manual", type: "PDF", category: "Training", downloads: 32, status: "published" },
-    { id: 3, title: "Annual Report 2023", type: "PDF", category: "Reports", downloads: 87, status: "published" },
+  const users = [
+    { id: 1, name: "Admin User", email: "admin@inmed.org.za", role: "supervisor", status: "active" },
+    { id: 2, name: "Content Manager", email: "content@inmed.org.za", role: "supervisor", status: "active" },
+    { id: 3, name: "Editor", email: "editor@inmed.org.za", role: "supervisor", status: "active" },
   ];
+
+  const getRoleBadgeColor = (role: string) => {
+    switch (role) {
+      case "supervisor":
+        return "bg-brand-purple/10 text-brand-purple border-brand-purple/20";
+      default:
+        return "bg-muted";
+    }
+  };
+
+  const getStatusBadgeColor = (status: string) => {
+    return status === "active" 
+      ? "bg-brand-green/10 text-brand-green border-brand-green/20" 
+      : "bg-muted";
+  };
 
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Resource Library</CardTitle>
-            <CardDescription>Upload and manage downloadable resources</CardDescription>
+            <CardTitle>User & Role Management</CardTitle>
+            <CardDescription>Manage user accounts and permissions</CardDescription>
           </div>
           <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-brand-teal hover:opacity-90 text-white">
+              <Button className="bg-brand-purple hover:opacity-90 text-white">
                 <Plus className="w-4 h-4 mr-2" />
-                Upload Resource
+                Add User
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-lg">
               <DialogHeader>
-                <DialogTitle>Upload New Resource</DialogTitle>
-                <DialogDescription>Add a new resource to the library</DialogDescription>
+                <DialogTitle>Add New User</DialogTitle>
+                <DialogDescription>Create a new user account</DialogDescription>
               </DialogHeader>
               <div className="space-y-4 py-4">
                 <div className="space-y-2">
-                  <Label htmlFor="resource-title">Title</Label>
-                  <Input id="resource-title" placeholder="Enter resource title" />
+                  <Label htmlFor="user-name">Name</Label>
+                  <Input id="user-name" placeholder="Enter user name" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="resource-category">Category</Label>
+                  <Label htmlFor="user-email">Email</Label>
+                  <Input id="user-email" type="email" placeholder="Enter user email" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="user-role">User Role</Label>
                   <Select>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select category" />
+                      <SelectValue placeholder="Select role" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="impact-report">Impact Report</SelectItem>
-                      <SelectItem value="training-toolkit">Training Toolkit</SelectItem>
-                      <SelectItem value="research-publication">Research Publication</SelectItem>
-                      <SelectItem value="curriculum-material">Curriculum Material</SelectItem>
-                      <SelectItem value="newsletter">Newsletter</SelectItem>
+                      <SelectItem value="supervisor">Supervisor</SelectItem>
+                      <SelectItem value="editor">Editor</SelectItem>
+                      <SelectItem value="viewer">Viewer</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="resource-file">Upload File</Label>
-                  <div className="flex items-center gap-2">
-                    <Input id="resource-file" type="file" />
-                    <Upload className="w-5 h-5 text-muted-foreground" />
-                  </div>
-                </div>
                 <div className="flex justify-end gap-2 pt-4">
                   <Button variant="outline" onClick={() => setIsCreateOpen(false)}>Cancel</Button>
-                  <Button className="bg-brand-teal hover:opacity-90 text-white">Upload Resource</Button>
+                  <Button className="bg-brand-purple hover:opacity-90 text-white">Add User</Button>
                 </div>
               </div>
             </DialogContent>
@@ -77,30 +87,25 @@ const ManageResourcesTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {resources.map((resource) => (
-            <div key={resource.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
+          {users.map((user) => (
+            <div key={user.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
               <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-brand-teal mt-1" />
+                <Shield className="w-5 h-5 text-brand-purple mt-1" />
                 <div className="flex-1">
-                  <h4 className="font-semibold text-foreground">{resource.title}</h4>
-                  <div className="flex items-center gap-3 mt-2 flex-wrap">
-                    <Badge variant="outline" className="text-xs">{resource.type}</Badge>
-                    <Badge variant="outline" className="text-xs">{resource.category}</Badge>
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Download className="w-3 h-3" />
-                      {resource.downloads} downloads
-                    </span>
-                    <Badge 
-                      variant="outline" 
-                      className="bg-brand-teal/10 text-brand-teal border-brand-teal/20"
-                    >
-                      {resource.status}
+                  <h4 className="font-semibold text-foreground">{user.name}</h4>
+                  <p className="text-sm text-muted-foreground mt-1">{user.email}</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <Badge variant="outline" className={getRoleBadgeColor(user.role)}>
+                      {user.role}
+                    </Badge>
+                    <Badge variant="outline" className={getStatusBadgeColor(user.status)}>
+                      {user.status}
                     </Badge>
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Dialog open={editingResource === resource.id} onOpenChange={(open) => setEditingResource(open ? resource.id : null)}>
+                <Dialog open={editingUser === user.id} onOpenChange={(open) => setEditingUser(open ? user.id : null)}>
                   <DialogTrigger asChild>
                     <Button variant="ghost" size="sm">
                       <Edit className="w-4 h-4" />
@@ -108,39 +113,34 @@ const ManageResourcesTab = () => {
                   </DialogTrigger>
                   <DialogContent className="max-w-lg">
                     <DialogHeader>
-                      <DialogTitle>Edit Resource</DialogTitle>
-                      <DialogDescription>Update resource details</DialogDescription>
+                      <DialogTitle>Edit User</DialogTitle>
+                      <DialogDescription>Update user details</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
                       <div className="space-y-2">
-                        <Label htmlFor="edit-resource-title">Title</Label>
-                        <Input id="edit-resource-title" defaultValue={resource.title} />
+                        <Label htmlFor="edit-user-name">Name</Label>
+                        <Input id="edit-user-name" defaultValue={user.name} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="edit-resource-category">Category</Label>
-                        <Select defaultValue={resource.category.toLowerCase().replace(' ', '-')}>
+                        <Label htmlFor="edit-user-email">Email</Label>
+                        <Input id="edit-user-email" type="email" defaultValue={user.email} />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="edit-user-role">User Role</Label>
+                        <Select defaultValue={user.role}>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="impact-report">Impact Report</SelectItem>
-                            <SelectItem value="training-toolkit">Training Toolkit</SelectItem>
-                            <SelectItem value="research-publication">Research Publication</SelectItem>
-                            <SelectItem value="curriculum-material">Curriculum Material</SelectItem>
-                            <SelectItem value="newsletter">Newsletter</SelectItem>
+                            <SelectItem value="supervisor">Supervisor</SelectItem>
+                            <SelectItem value="editor">Editor</SelectItem>
+                            <SelectItem value="viewer">Viewer</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="edit-resource-file">Upload New File</Label>
-                        <div className="flex items-center gap-2">
-                          <Input id="edit-resource-file" type="file" />
-                          <Upload className="w-5 h-5 text-muted-foreground" />
-                        </div>
-                      </div>
                       <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setEditingResource(null)}>Cancel</Button>
-                        <Button className="bg-brand-teal hover:opacity-90 text-white">Save Changes</Button>
+                        <Button variant="outline" onClick={() => setEditingUser(null)}>Cancel</Button>
+                        <Button className="bg-brand-purple hover:opacity-90 text-white">Save Changes</Button>
                       </div>
                     </div>
                   </DialogContent>
@@ -152,9 +152,19 @@ const ManageResourcesTab = () => {
             </div>
           ))}
         </div>
+
+        <div className="mt-6 p-4 bg-muted rounded-lg">
+          <h5 className="font-semibold text-sm mb-2">Available Roles</h5>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className={getRoleBadgeColor("supervisor")}>Supervisor</Badge>
+              <span>Full access to all features and content management</span>
+            </div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
 };
 
-export default ManageResourcesTab;
+export default UserRolesTab;
