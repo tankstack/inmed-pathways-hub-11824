@@ -5,77 +5,80 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Edit, Trash2, Upload } from "lucide-react";
+import { Plus, Edit, Trash2, Shield } from "lucide-react";
 
-const ManagePostsTab = () => {
+const UserRolesTab = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [editingPost, setEditingPost] = useState<number | null>(null);
+  const [editingUser, setEditingUser] = useState<number | null>(null);
   
   // Placeholder data
-  const posts = [
-    { id: 1, title: "Community Garden Initiative Launch", category: "News", status: "published", date: "2024-01-15" },
-    { id: 2, title: "Nutrition Workshop Success", category: "Updates", status: "published", date: "2024-01-10" },
-    { id: 3, title: "New Partnership Announcement", category: "News", status: "published", date: "2024-01-05" },
+  const users = [
+    { id: 1, name: "Admin User", email: "admin@inmed.org.za", role: "supervisor", status: "active" },
+    { id: 2, name: "Content Manager", email: "content@inmed.org.za", role: "supervisor", status: "active" },
+    { id: 3, name: "Editor", email: "editor@inmed.org.za", role: "supervisor", status: "active" },
   ];
+
+  const getRoleBadgeColor = (role: string) => {
+    switch (role) {
+      case "supervisor":
+        return "bg-brand-purple/10 text-brand-purple border-brand-purple/20";
+      default:
+        return "bg-muted";
+    }
+  };
+
+  const getStatusBadgeColor = (status: string) => {
+    return status === "active" 
+      ? "bg-brand-green/10 text-brand-green border-brand-green/20" 
+      : "bg-muted";
+  };
 
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Manage Posts & News</CardTitle>
-            <CardDescription>Create and manage news articles and blog posts</CardDescription>
+            <CardTitle>User & Role Management</CardTitle>
+            <CardDescription>Manage user accounts and permissions</CardDescription>
           </div>
           <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
+              <Button className="bg-brand-purple hover:opacity-90 text-white">
                 <Plus className="w-4 h-4 mr-2" />
-                New Post
+                Add User
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="max-w-lg">
               <DialogHeader>
-                <DialogTitle>Create New Post</DialogTitle>
-                <DialogDescription>Add a new post or news article</DialogDescription>
+                <DialogTitle>Add New User</DialogTitle>
+                <DialogDescription>Create a new user account</DialogDescription>
               </DialogHeader>
               <div className="space-y-4 py-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Title</Label>
-                  <Input id="title" placeholder="Enter post title" />
+                  <Label htmlFor="user-name">Name</Label>
+                  <Input id="user-name" placeholder="Enter user name" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="user-email">Email</Label>
+                  <Input id="user-email" type="email" placeholder="Enter user email" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="user-role">User Role</Label>
                   <Select>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select category" />
+                      <SelectValue placeholder="Select role" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="project">Project (shows on Home page)</SelectItem>
-                      <SelectItem value="board">Board (shows on About Us & Board Gallery)</SelectItem>
-                      <SelectItem value="team">Team (shows on Team & Team Gallery)</SelectItem>
-                      <SelectItem value="program">Program (shows on Our Work & Program Gallery)</SelectItem>
-                      <SelectItem value="news">News</SelectItem>
-                      <SelectItem value="updates">Updates</SelectItem>
+                      <SelectItem value="supervisor">Supervisor</SelectItem>
+                      <SelectItem value="editor">Editor</SelectItem>
+                      <SelectItem value="viewer">Viewer</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea id="description" placeholder="Enter post description" rows={6} />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="image">Upload Image</Label>
-                  <div className="flex items-center gap-2">
-                    <Input id="image" type="file" accept="image/*" />
-                    <Upload className="w-5 h-5 text-muted-foreground" />
-                  </div>
-                  <p className="text-xs text-muted-foreground">At least one image required</p>
-                </div>
                 <div className="flex justify-end gap-2 pt-4">
                   <Button variant="outline" onClick={() => setIsCreateOpen(false)}>Cancel</Button>
-                  <Button className="bg-brand-green hover:bg-brand-green-dark text-white">Create Post</Button>
+                  <Button className="bg-brand-purple hover:opacity-90 text-white">Add User</Button>
                 </div>
               </div>
             </DialogContent>
@@ -84,68 +87,60 @@ const ManagePostsTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {posts.map((post) => (
-            <div key={post.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
-              <div className="flex-1">
-                <h4 className="font-semibold text-foreground">{post.title}</h4>
-                <div className="flex items-center gap-3 mt-2">
-                  <Badge variant="outline" className="text-xs">{post.category}</Badge>
-                  <Badge 
-                    variant="outline" 
-                    className={post.status === "published" ? "bg-brand-green/10 text-brand-green border-brand-green/20" : "bg-muted"}
-                  >
-                    {post.status}
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">{post.date}</span>
+          {users.map((user) => (
+            <div key={user.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
+              <div className="flex items-start gap-3 flex-1">
+                <Shield className="w-5 h-5 text-brand-purple mt-1" />
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground">{user.name}</h4>
+                  <p className="text-sm text-muted-foreground mt-1">{user.email}</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <Badge variant="outline" className={getRoleBadgeColor(user.role)}>
+                      {user.role}
+                    </Badge>
+                    <Badge variant="outline" className={getStatusBadgeColor(user.status)}>
+                      {user.status}
+                    </Badge>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Dialog open={editingPost === post.id} onOpenChange={(open) => setEditingPost(open ? post.id : null)}>
+                <Dialog open={editingUser === user.id} onOpenChange={(open) => setEditingUser(open ? user.id : null)}>
                   <DialogTrigger asChild>
                     <Button variant="ghost" size="sm">
                       <Edit className="w-4 h-4" />
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                  <DialogContent className="max-w-lg">
                     <DialogHeader>
-                      <DialogTitle>Edit Post</DialogTitle>
-                      <DialogDescription>Update post details</DialogDescription>
+                      <DialogTitle>Edit User</DialogTitle>
+                      <DialogDescription>Update user details</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
                       <div className="space-y-2">
-                        <Label htmlFor="edit-title">Title</Label>
-                        <Input id="edit-title" defaultValue={post.title} />
+                        <Label htmlFor="edit-user-name">Name</Label>
+                        <Input id="edit-user-name" defaultValue={user.name} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="edit-category">Category</Label>
-                        <Select defaultValue={post.category.toLowerCase()}>
+                        <Label htmlFor="edit-user-email">Email</Label>
+                        <Input id="edit-user-email" type="email" defaultValue={user.email} />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="edit-user-role">User Role</Label>
+                        <Select defaultValue={user.role}>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="project">Project (shows on Home page)</SelectItem>
-                            <SelectItem value="board">Board (shows on About Us & Board Gallery)</SelectItem>
-                            <SelectItem value="team">Team (shows on Team & Team Gallery)</SelectItem>
-                            <SelectItem value="program">Program (shows on Our Work & Program Gallery)</SelectItem>
-                            <SelectItem value="news">News</SelectItem>
-                            <SelectItem value="updates">Updates</SelectItem>
+                            <SelectItem value="supervisor">Supervisor</SelectItem>
+                            <SelectItem value="editor">Editor</SelectItem>
+                            <SelectItem value="viewer">Viewer</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="edit-description">Description</Label>
-                        <Textarea id="edit-description" placeholder="Enter post description" rows={6} />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="edit-image">Upload New Image</Label>
-                        <div className="flex items-center gap-2">
-                          <Input id="edit-image" type="file" accept="image/*" />
-                          <Upload className="w-5 h-5 text-muted-foreground" />
-                        </div>
-                      </div>
                       <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setEditingPost(null)}>Cancel</Button>
-                        <Button className="bg-brand-green hover:bg-brand-green-dark text-white">Save Changes</Button>
+                        <Button variant="outline" onClick={() => setEditingUser(null)}>Cancel</Button>
+                        <Button className="bg-brand-purple hover:opacity-90 text-white">Save Changes</Button>
                       </div>
                     </div>
                   </DialogContent>
@@ -157,9 +152,19 @@ const ManagePostsTab = () => {
             </div>
           ))}
         </div>
+
+        <div className="mt-6 p-4 bg-muted rounded-lg">
+          <h5 className="font-semibold text-sm mb-2">Available Roles</h5>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className={getRoleBadgeColor("supervisor")}>Supervisor</Badge>
+              <span>Full access to all features and content management</span>
+            </div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
 };
 
-export default ManagePostsTab;
+export default UserRolesTab;
