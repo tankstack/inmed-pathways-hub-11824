@@ -5,17 +5,19 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Plus, Edit, Trash2, Calendar } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Plus, Edit, Trash2, Upload } from "lucide-react";
 
-const ManageEventsTab = () => {
+const ManagePostsTab = () => {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [editingEvent, setEditingEvent] = useState<number | null>(null);
+  const [editingPost, setEditingPost] = useState<number | null>(null);
   
   // Placeholder data
-  const events = [
-    { id: 1, title: "Community Workshop: Sustainable Farming", date: "2024-02-15", location: "Cape Town", status: "published" },
-    { id: 2, title: "Youth Training Program", date: "2024-02-20", location: "Johannesburg", status: "published" },
-    { id: 3, title: "Partner Meeting", date: "2024-02-25", location: "Durban", status: "published" },
+  const posts = [
+    { id: 1, title: "Community Garden Initiative Launch", category: "News", status: "published", date: "2024-01-15" },
+    { id: 2, title: "Nutrition Workshop Success", category: "Updates", status: "published", date: "2024-01-10" },
+    { id: 3, title: "New Partnership Announcement", category: "News", status: "published", date: "2024-01-05" },
   ];
 
   return (
@@ -23,37 +25,57 @@ const ManageEventsTab = () => {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Manage Events</CardTitle>
-            <CardDescription>Create and manage upcoming events and workshops</CardDescription>
+            <CardTitle>Manage Posts & News</CardTitle>
+            <CardDescription>Create and manage news articles and blog posts</CardDescription>
           </div>
           <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-brand-magenta hover:opacity-90 text-white">
+              <Button className="bg-brand-green hover:bg-brand-green-dark text-white">
                 <Plus className="w-4 h-4 mr-2" />
-                New Event
+                New Post
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-lg">
+            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>Create New Event</DialogTitle>
-                <DialogDescription>Add a new event or workshop</DialogDescription>
+                <DialogTitle>Create New Post</DialogTitle>
+                <DialogDescription>Add a new post or news article</DialogDescription>
               </DialogHeader>
               <div className="space-y-4 py-4">
                 <div className="space-y-2">
-                  <Label htmlFor="event-title">Title</Label>
-                  <Input id="event-title" placeholder="Enter event title" />
+                  <Label htmlFor="title">Title</Label>
+                  <Input id="title" placeholder="Enter post title" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="event-place">Place</Label>
-                  <Input id="event-place" placeholder="Enter event location" />
+                  <Label htmlFor="category">Category</Label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="project">Project (shows on Home page)</SelectItem>
+                      <SelectItem value="board">Board (shows on About Us & Board Gallery)</SelectItem>
+                      <SelectItem value="team">Team (shows on Team & Team Gallery)</SelectItem>
+                      <SelectItem value="program">Program (shows on Our Work & Program Gallery)</SelectItem>
+                      <SelectItem value="news">News</SelectItem>
+                      <SelectItem value="updates">Updates</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="event-date">Date</Label>
-                  <Input id="event-date" type="date" />
+                  <Label htmlFor="description">Description</Label>
+                  <Textarea id="description" placeholder="Enter post description" rows={6} />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="image">Upload Image</Label>
+                  <div className="flex items-center gap-2">
+                    <Input id="image" type="file" accept="image/*" />
+                    <Upload className="w-5 h-5 text-muted-foreground" />
+                  </div>
+                  <p className="text-xs text-muted-foreground">At least one image required</p>
                 </div>
                 <div className="flex justify-end gap-2 pt-4">
                   <Button variant="outline" onClick={() => setIsCreateOpen(false)}>Cancel</Button>
-                  <Button className="bg-brand-magenta hover:opacity-90 text-white">Create Event</Button>
+                  <Button className="bg-brand-green hover:bg-brand-green-dark text-white">Create Post</Button>
                 </div>
               </div>
             </DialogContent>
@@ -62,52 +84,68 @@ const ManageEventsTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {events.map((event) => (
-            <div key={event.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
-              <div className="flex items-start gap-3 flex-1">
-                <Calendar className="w-5 h-5 text-brand-magenta mt-1" />
-                <div className="flex-1">
-                  <h4 className="font-semibold text-foreground">{event.title}</h4>
-                  <div className="flex items-center gap-3 mt-2 flex-wrap">
-                    <span className="text-sm text-muted-foreground">{event.date}</span>
-                    <Badge variant="outline" className="text-xs">{event.location}</Badge>
-                    <Badge 
-                      variant="outline" 
-                      className="bg-brand-magenta/10 text-brand-magenta border-brand-magenta/20"
-                    >
-                      {event.status}
-                    </Badge>
-                  </div>
+          {posts.map((post) => (
+            <div key={post.id} className="flex items-center justify-between p-4 border border-border rounded-lg hover:shadow-soft transition-shadow">
+              <div className="flex-1">
+                <h4 className="font-semibold text-foreground">{post.title}</h4>
+                <div className="flex items-center gap-3 mt-2">
+                  <Badge variant="outline" className="text-xs">{post.category}</Badge>
+                  <Badge 
+                    variant="outline" 
+                    className={post.status === "published" ? "bg-brand-green/10 text-brand-green border-brand-green/20" : "bg-muted"}
+                  >
+                    {post.status}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">{post.date}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Dialog open={editingEvent === event.id} onOpenChange={(open) => setEditingEvent(open ? event.id : null)}>
+                <Dialog open={editingPost === post.id} onOpenChange={(open) => setEditingPost(open ? post.id : null)}>
                   <DialogTrigger asChild>
                     <Button variant="ghost" size="sm">
                       <Edit className="w-4 h-4" />
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-lg">
+                  <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
-                      <DialogTitle>Edit Event</DialogTitle>
-                      <DialogDescription>Update event details</DialogDescription>
+                      <DialogTitle>Edit Post</DialogTitle>
+                      <DialogDescription>Update post details</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
                       <div className="space-y-2">
-                        <Label htmlFor="edit-event-title">Title</Label>
-                        <Input id="edit-event-title" defaultValue={event.title} />
+                        <Label htmlFor="edit-title">Title</Label>
+                        <Input id="edit-title" defaultValue={post.title} />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="edit-event-place">Place</Label>
-                        <Input id="edit-event-place" defaultValue={event.location} />
+                        <Label htmlFor="edit-category">Category</Label>
+                        <Select defaultValue={post.category.toLowerCase()}>
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="project">Project (shows on Home page)</SelectItem>
+                            <SelectItem value="board">Board (shows on About Us & Board Gallery)</SelectItem>
+                            <SelectItem value="team">Team (shows on Team & Team Gallery)</SelectItem>
+                            <SelectItem value="program">Program (shows on Our Work & Program Gallery)</SelectItem>
+                            <SelectItem value="news">News</SelectItem>
+                            <SelectItem value="updates">Updates</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="edit-event-date">Date</Label>
-                        <Input id="edit-event-date" type="date" defaultValue={event.date} />
+                        <Label htmlFor="edit-description">Description</Label>
+                        <Textarea id="edit-description" placeholder="Enter post description" rows={6} />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="edit-image">Upload New Image</Label>
+                        <div className="flex items-center gap-2">
+                          <Input id="edit-image" type="file" accept="image/*" />
+                          <Upload className="w-5 h-5 text-muted-foreground" />
+                        </div>
                       </div>
                       <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setEditingEvent(null)}>Cancel</Button>
-                        <Button className="bg-brand-magenta hover:opacity-90 text-white">Save Changes</Button>
+                        <Button variant="outline" onClick={() => setEditingPost(null)}>Cancel</Button>
+                        <Button className="bg-brand-green hover:bg-brand-green-dark text-white">Save Changes</Button>
                       </div>
                     </div>
                   </DialogContent>
@@ -124,5 +162,4 @@ const ManageEventsTab = () => {
   );
 };
 
-export default ManageEventsTab;
-
+export default ManagePostsTab;

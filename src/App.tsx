@@ -8,9 +8,18 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Gallery from "./pages/Gallery";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+//import TestFirebaseConnection from "./TestFirebaseConnection";
 
+// (use this ONLY to check Firebase)
+
+/*
+export function TestApp() {
+  return <TestFirebaseConnection />;
+}
+*/
 const queryClient = new QueryClient();
 
+// 🌍 MAIN APP
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -22,7 +31,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/gallery" element={<Gallery />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* CATCH-ALL */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
@@ -31,3 +40,4 @@ const App = () => (
 );
 
 export default App;
+
