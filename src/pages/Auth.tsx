@@ -6,17 +6,37 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, Mail, LogIn } from "lucide-react";
 import inmedLogo from "@/assets/inmed-logo.png";
+import { signIn } from "@/Firebase/auth";
+import { TEST_USER } from "@/Firebase/testCredentials";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple validation - just check if fields are filled
-    if (email && password) {
+    if (!email || !password) return;
+
+    try {
+      await signIn(email, password);
       navigate("/admin");
+    } catch (err) {
+      console.error("Sign-in failed", err);
+      alert("Sign-in failed. Check credentials or console for details.");
+    }
+  };
+
+  const useTestCredentials = async () => {
+    setEmail(TEST_USER.email);
+    setPassword(TEST_USER.password);
+
+    try {
+      await signIn(TEST_USER.email, TEST_USER.password);
+      navigate("/admin");
+    } catch (err) {
+      console.error("Test sign-in failed", err);
+      alert("Test sign-in failed. Make sure emulator/credentials are configured.");
     }
   };
 
@@ -75,6 +95,15 @@ const Auth = () => {
           >
             <LogIn className="w-5 h-5 mr-2" />
             Sign In
+          </Button>
+
+          <Button
+            type="button"
+            variant="outline"
+            onClick={useTestCredentials}
+            className="w-full mt-2"
+          >
+            Use Test Credentials
           </Button>
         </form>
 

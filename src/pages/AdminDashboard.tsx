@@ -18,10 +18,21 @@ import ManageEventsTab from "@/components/admin/ManageEventsTab";
 import ManageResourcesTab from "@/components/admin/ManageResourcesTab";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
 import UserRolesTab from "@/components/admin/UserRolesTab";
+import { auth } from "@/Firebase/auth";
+import { signOut } from "firebase/auth";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/auth");
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
 
   // Placeholder data
   const stats = [
@@ -45,7 +56,7 @@ const AdminDashboard = () => {
               <Button variant="outline" size="sm" onClick={() => navigate("/")}>
                 View Site
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
                 <LogOut className="w-4 h-4 mr-2" />
                 Logout
               </Button>

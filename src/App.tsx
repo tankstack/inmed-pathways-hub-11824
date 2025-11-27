@@ -8,6 +8,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Gallery from "./pages/Gallery";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 //import TestFirebaseConnection from "./TestFirebaseConnection";
 
 // (use this ONLY to check Firebase)
@@ -29,7 +30,14 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="/gallery" element={<Gallery />} />
           {/* CATCH-ALL */}
           <Route path="*" element={<NotFound />} />
