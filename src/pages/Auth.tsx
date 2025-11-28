@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,12 +7,19 @@ import { Label } from "@/components/ui/label";
 import { Lock, Mail, LogIn } from "lucide-react";
 import inmedLogo from "@/assets/inmed-logo.png";
 import { signIn } from "@/Firebase/auth";
-import { TEST_USER } from "@/Firebase/testCredentials";
+import { TEST_USER, isTestCredsConfigured } from "@/Firebase/testCredentials";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // If test credentials are configured, prefill the email field for convenience.
+    if (isTestCredsConfigured()) {
+      setEmail(TEST_USER.email);
+    }
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
