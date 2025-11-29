@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; */
+
 
 /* INMED South Africa Design System - White base with professional humanitarian colors */
 

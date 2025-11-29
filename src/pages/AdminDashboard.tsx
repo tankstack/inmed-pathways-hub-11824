@@ -13,7 +13,7 @@ import {
   BarChart3,
   FolderOpen
 } from "lucide-react";
-import ManagePostsTab from "@/components/admin/ManagePostsTab";
+import ManagePostsTab from "@/components/admin/posts/ManagePostsTab";
 import ManageEventsTab from "@/components/admin/ManageEventsTab";
 import ManageResourcesTab from "@/components/admin/ManageResourcesTab";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
